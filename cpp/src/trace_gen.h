@@ -3,6 +3,7 @@
 
 #include <variant>
 #include <vector>
+#include <optional>
 
 #include "task.h"
 

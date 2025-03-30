@@ -1,0 +1,181 @@
+name: Github Classroom Autograding
+on:
+  - push
+  - workflow_dispatch
+  - repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  autograding:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Compile
+      run: |
+        cd cpp
+        if ! [ -d "build" ]; then
+            mkdir build
+        fi
+        cd build
+        cmake .. -DCMAKE_BUILD_TYPE=Release
+        make -j
+    
+    - name: Run test1
+      uses: panjd123/autograding-command-grader@v1
+      id: test1
+      with:
+        test-name: test1
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-1.json
+        timeout: 10
+        max-score: 1
+    - name: Run test2
+      uses: panjd123/autograding-command-grader@v1
+      id: test2
+      with:
+        test-name: test2
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-2.json
+        timeout: 10
+        max-score: 1
+    - name: Run test3
+      uses: panjd123/autograding-command-grader@v1
+      id: test3
+      with:
+        test-name: test3
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-3.json
+        timeout: 10
+        max-score: 1
+    - name: Run test4
+      uses: panjd123/autograding-command-grader@v1
+      id: test4
+      with:
+        test-name: test4
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-4.json
+        timeout: 10
+        max-score: 1
+    - name: Run test5
+      uses: panjd123/autograding-command-grader@v1
+      id: test5
+      with:
+        test-name: test5
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-5.json
+        timeout: 10
+        max-score: 1
+    - name: Run test6
+      uses: panjd123/autograding-command-grader@v1
+      id: test6
+      with:
+        test-name: test6
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-6.json
+        timeout: 10
+        max-score: 1
+    - name: Run test7
+      uses: panjd123/autograding-command-grader@v1
+      id: test7
+      with:
+        test-name: test7
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-7.json
+        timeout: 10
+        max-score: 1
+    - name: Run test8
+      uses: panjd123/autograding-command-grader@v1
+      id: test8
+      with:
+        test-name: test8
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-8.json
+        timeout: 10
+        max-score: 1
+    - name: Run test9
+      uses: panjd123/autograding-command-grader@v1
+      id: test9
+      with:
+        test-name: test9
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-9.json
+        timeout: 10
+        max-score: 1
+    - name: Run test10
+      uses: panjd123/autograding-command-grader@v1
+      id: test10
+      with:
+        test-name: test10
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-10.json
+        timeout: 10
+        max-score: 1
+    - name: Run test11
+      uses: panjd123/autograding-command-grader@v1
+      id: test11
+      with:
+        test-name: test11
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-11.json
+        timeout: 10
+        max-score: 1
+    - name: Run test12
+      uses: panjd123/autograding-command-grader@v1
+      id: test12
+      with:
+        test-name: test12
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-12.json
+        timeout: 10
+        max-score: 1
+    - name: Run test13
+      uses: panjd123/autograding-command-grader@v1
+      id: test13
+      with:
+        test-name: test13
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-13.json
+        timeout: 10
+        max-score: 1
+    - name: Run test14
+      uses: panjd123/autograding-command-grader@v1
+      id: test14
+      with:
+        test-name: test14
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-14.json
+        timeout: 10
+        max-score: 1
+    - name: Run test15
+      uses: panjd123/autograding-command-grader@v1
+      id: test15
+      with:
+        test-name: test15
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-15.json
+        timeout: 10
+        max-score: 1
+    - name: Run test16
+      uses: panjd123/autograding-command-grader@v1
+      id: test16
+      with:
+        test-name: test16
+        command: WRITE_AUTOGRADER_RESULT=1 ./cpp/build/src/sim_cpp configs/sim_config.json traces/trace-16.json
+        timeout: 10
+        max-score: 1
+
+        
+    - name: Autograding Reporter
+      uses: panjd123/autograding-grading-reporter@v1
+      env:
+        TEST1_RESULTS: "${{ steps.test1.outputs.result }}"
+        TEST2_RESULTS: "${{ steps.test2.outputs.result }}"
+        TEST3_RESULTS: "${{ steps.test3.outputs.result }}"
+        TEST4_RESULTS: "${{ steps.test4.outputs.result }}"
+        TEST5_RESULTS: "${{ steps.test5.outputs.result }}"
+        TEST6_RESULTS: "${{ steps.test6.outputs.result }}"
+        TEST7_RESULTS: "${{ steps.test7.outputs.result }}"
+        TEST8_RESULTS: "${{ steps.test8.outputs.result }}"
+        TEST9_RESULTS: "${{ steps.test9.outputs.result }}"
+        TEST10_RESULTS: "${{ steps.test10.outputs.result }}"
+        TEST11_RESULTS: "${{ steps.test11.outputs.result }}"
+        TEST12_RESULTS: "${{ steps.test12.outputs.result }}"
+        TEST13_RESULTS: "${{ steps.test13.outputs.result }}"
+        TEST14_RESULTS: "${{ steps.test14.outputs.result }}"
+        TEST15_RESULTS: "${{ steps.test15.outputs.result }}"
+        TEST16_RESULTS: "${{ steps.test16.outputs.result }}"
+      with:
+        runners: test1, test2, test3, test4, test5, test6, test7, test8, test9, test10, test11, test12, test13, test14, test15, test16
+
+
+

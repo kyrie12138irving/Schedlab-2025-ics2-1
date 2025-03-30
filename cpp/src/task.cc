@@ -13,7 +13,7 @@ RuntimeTask::RuntimeTask(const TaskComplete& task) : TaskComplete(task) {
   next_taskId++;
 }
 
-bool RuntimeTask::final_slice() { return current_slice == (slices.size() - 1); }
+bool RuntimeTask::final_slice() { return current_slice == ((int)slices.size() - 1); }
 
 int RuntimeTask::slice_remaining() {
   assert(current_slice < slices.size());
@@ -33,7 +33,7 @@ void RuntimeTask::progress(int elapsed) {
 }
 
 bool RuntimeTask::cpu_next() {
-  if (current_slice == slices.size() ||
+  if (current_slice == (int)slices.size() ||
       slices[current_slice].first == TaskComplete::ComputeType::kIo) {
     return false;
   } else {

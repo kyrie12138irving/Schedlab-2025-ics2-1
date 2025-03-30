@@ -36,6 +36,13 @@ int main(int argc, char const *argv[]) {
   CERR_VAR(res.elapsed_time);
   CERR_VAR(cal_needed_time(serie));
   COUT_VAR(res.score);
+  const char *write_autograder_result = getenv("WRITE_AUTOGRADER_RESULT");
+  if (write_autograder_result && strcmp(write_autograder_result, "1") == 0)
+  {
+    std::ofstream result_file(".autograder_result");
+    result_file << res.score << std::endl;
+    result_file.close();
+  }
 
   return 0;
 }
@@ -218,6 +225,13 @@ Action policy(const std::vector<std::reference_wrapper<EventInternal>> &events,
 void terminate(const std::string &msg) {
   std::cout << json(msg) << std::endl;
   CERR_THIS("0");
+  const char *write_autograder_result = getenv("WRITE_AUTOGRADER_RESULT");
+  if (write_autograder_result && strcmp(write_autograder_result, "1") == 0)
+  {
+    std::ofstream result_file(".autograder_result");
+    result_file << 0 << std::endl;
+    result_file.close();
+  }
   exit(0);
 }
 
